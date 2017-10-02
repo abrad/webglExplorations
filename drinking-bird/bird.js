@@ -150,12 +150,10 @@ function createHead() {
 function createDrinkingBird() {
     // MODELS
     // base + legs + feet
-    console.log("SUPPORT");
     createSupport();
 
     // body + body/head connector
     createBody();
-    console.log("BODY");
 
     // head + hat
     createHead();
