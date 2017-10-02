@@ -54,7 +54,10 @@ function init() {
 // Supporting frame for the bird - base + legs + feet
 function createSupport() {
 
-    var cubeMaterial = new THREE.MeshLambertMaterial({ color: 0xF07020 });
+    var cubeMaterial = new THREE.MeshPhongMaterial({ color: 0xF07020 });
+    cubeMaterial.shininess = 4;
+    cubeMaterial.specular = new THREE.Color(0.5, 0.5, 0.5);
+
     // base
     var cube;
     cube = new THREE.Mesh(
@@ -100,8 +103,14 @@ function createSupport() {
 
 // Body of the bird - body and the connector of body and head
 function createBody() {
-    var sphereMaterial = new THREE.MeshLambertMaterial({ color: 0xA00000 });
-    var cylinderMaterial = new THREE.MeshLambertMaterial({ color: 0x0000D0 });
+    var sphereMaterial = new THREE.MeshPhongMaterial({ color: 0xA00000 });
+    var cylinderMaterial = new THREE.MeshPhongMaterial({ color: 0x0000D0 });
+
+    sphereMaterial.shininess = 100;
+    sphereMaterial.specular = new THREE.Color(0.5, 0.5, 0.5);
+
+    cylinderMaterial.shininess = 100;
+    cylinderMaterial.specular = new THREE.Color(0.5, 0.5, 0.5);
 
     var sphere = new THREE.Mesh(
         new THREE.SphereGeometry(64, 32, 16), sphereMaterial);
@@ -121,8 +130,14 @@ function createBody() {
 
 // Head of the bird - head + hat
 function createHead() {
-    var sphereMaterial = new THREE.MeshLambertMaterial({ color: 0xA00000 });
-    var cylinderMaterial = new THREE.MeshLambertMaterial({ color: 0x0000D0 });
+    var sphereMaterial = new THREE.MeshPhongMaterial({ color: 0xA00000 });
+    var cylinderMaterial = new THREE.MeshPhongMaterial({ color: 0x0000D0 });
+
+    sphereMaterial.shininess = 100;
+    sphereMaterial.specular = new THREE.Color(0.5, 0.5, 0.5);
+
+    cylinderMaterial.shininess = 100;
+    cylinderMaterial.specular = new THREE.Color(0.5, 0.5, 0.5);
 
     var sphere = new THREE.Mesh(
         new THREE.SphereGeometry(64, 32, 16), sphereMaterial);
@@ -252,5 +267,5 @@ try {
     animate();
 } catch (e) {
     var errorReport = "Your program encountered an unrecoverable error, can not draw on canvas. Error was:<br/><br/>";
-    document.getElementById('#container').append(errorReport + e);
+    document.getElementById('container').append(errorReport + e);
 }
