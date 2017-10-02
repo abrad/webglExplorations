@@ -34,19 +34,19 @@ function init() {
     var canvasRatio = canvasWidth / canvasHeight;
 
     // RENDERER
-    renderer = new THREE.WebGLRenderer( { antialias: true } );
+    renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.gammaInput = true;
     renderer.gammaOutput = true;
     renderer.setSize(canvasWidth, canvasHeight);
     //renderer.setClearColorHex( 0xAAAAAA, 1.0 );
 
     // CAMERA
-    camera = new THREE.PerspectiveCamera( 45, canvasRatio, 1, 40000 );
+    camera = new THREE.PerspectiveCamera(45, canvasRatio, 1, 40000);
     // CONTROLS
     cameraControls = new THREE.OrbitControls(camera, renderer.domElement);
 
-    camera.position.set( -480, 659, -619 );
-    cameraControls.target.set(4,301,92);
+    camera.position.set(-480, 659, -619);
+    cameraControls.target.set(4, 301, 92);
 
     fillScene();
 }
@@ -54,71 +54,108 @@ function init() {
 // Supporting frame for the bird - base + legs + feet
 function createSupport() {
 
-   var cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xF07020 } );
+    var cubeMaterial = new THREE.MeshLambertMaterial({ color: 0xF07020 });
     // base
     var cube;
-    cube = new THREE.Mesh( 
-        new THREE.CubeGeometry( 20+64+110, 4, 2*77 ), cubeMaterial );
-    cube.position.x = -45;  // (20+32) - half of width (20+64+110)/2
-    cube.position.y = 4/2;  // half of height
-    cube.position.z = 0;    // centered at origin
-    scene.add( cube );
-    
+    cube = new THREE.Mesh(
+        new THREE.CubeGeometry(20 + 64 + 110, 4, 2 * 77), cubeMaterial);
+    cube.position.x = -45; // (20+32) - half of width (20+64+110)/2
+    cube.position.y = 4 / 2; // half of height
+    cube.position.z = 0; // centered at origin
+    scene.add(cube);
+
     // left foot
-    cube = new THREE.Mesh( 
-        new THREE.CubeGeometry( 20+64+110, 52, 6 ), cubeMaterial );
-    cube.position.x = -45;  // (20+32) - half of width (20+64+110)/2
-    cube.position.y = 52/2; // half of height
-    cube.position.z = 77 + 6/2; // offset 77 + half of depth 6/2
-    scene.add( cube );
-    
+    cube = new THREE.Mesh(
+        new THREE.CubeGeometry(20 + 64 + 110, 52, 6), cubeMaterial);
+    cube.position.x = -45; // (20+32) - half of width (20+64+110)/2
+    cube.position.y = 52 / 2; // half of height
+    cube.position.z = 77 + 6 / 2; // offset 77 + half of depth 6/2
+    scene.add(cube);
+
     // left leg
-    cube = new THREE.Mesh( 
-        new THREE.CubeGeometry( 64, 334+52, 6 ), cubeMaterial );
-    cube.position.x = 0;    // centered on origin along X
-    cube.position.y = (334+52)/2;
-    cube.position.z = 77 + 6/2; // offset 77 + half of depth 6/2
-    scene.add( cube );
-    
+    cube = new THREE.Mesh(
+        new THREE.CubeGeometry(64, 334 + 52, 6), cubeMaterial);
+    cube.position.x = 0; // centered on origin along X
+    cube.position.y = (334 + 52) / 2;
+    cube.position.z = 77 + 6 / 2; // offset 77 + half of depth 6/2
+    scene.add(cube);
+
     // right foot
-    cube = new THREE.Mesh( 
-        new THREE.CubeGeometry( 20+64+110, 52, 6 ), cubeMaterial );
-    cube.position.x = -45;  // (20+32) - half of width (20+64+110)/2
-    cube.position.y = 52/2; // half of height
-    cube.position.z = -77 - 6/2;    // offset 77 + half of depth 6/2
-    scene.add( cube );
-    
+    cube = new THREE.Mesh(
+        new THREE.CubeGeometry(20 + 64 + 110, 52, 6), cubeMaterial);
+    cube.position.x = -45; // (20+32) - half of width (20+64+110)/2
+    cube.position.y = 52 / 2; // half of height
+    cube.position.z = -77 - 6 / 2; // offset 77 + half of depth 6/2
+    scene.add(cube);
+
     // right leg
-    cube = new THREE.Mesh( 
-        new THREE.CubeGeometry( 64, 334+52, 6 ), cubeMaterial );
-    cube.position.x = 0;    // centered on origin along X
-    cube.position.y = (334+52)/2;
-    cube.position.z = -77 - 6/2;    // offset 77 + half of depth 6/2
-    scene.add( cube );
+    cube = new THREE.Mesh(
+        new THREE.CubeGeometry(64, 334 + 52, 6), cubeMaterial);
+    cube.position.x = 0; // centered on origin along X
+    cube.position.y = (334 + 52) / 2;
+    cube.position.z = -77 - 6 / 2; // offset 77 + half of depth 6/2
+    scene.add(cube);
 
 }
 
 // Body of the bird - body and the connector of body and head
 function createBody() {
-   var sphereMaterial = new THREE.MeshLambertMaterial( { color: 0xA00000 } );
-   var cylinderMaterial = new THREE.MeshLambertMaterial( { color: 0x0000D0 } );
+    var sphereMaterial = new THREE.MeshLambertMaterial({ color: 0xA00000 });
+    var cylinderMaterial = new THREE.MeshLambertMaterial({ color: 0x0000D0 });
+
+    var sphere = new THREE.Mesh(
+        new THREE.SphereGeometry(64, 32, 16), sphereMaterial);
+    sphere.position.x = 0;
+    sphere.position.y = 160;
+    sphere.position.z = 0;
+    scene.add(sphere);
+
+    var cylinder = new THREE.Mesh(
+        new THREE.CylinderGeometry(24, 24, 390, 32), cylinderMaterial);
+    cylinder.position.x = 0;
+    cylinder.position.y = 160 * 2;
+    cylinder.position.z = 0;
+    scene.add(cylinder);
 
 }
 
 // Head of the bird - head + hat
 function createHead() {
-   var sphereMaterial = new THREE.MeshLambertMaterial( { color: 0xA00000 } );
-   var cylinderMaterial = new THREE.MeshLambertMaterial( { color: 0x0000D0 } );
+    var sphereMaterial = new THREE.MeshLambertMaterial({ color: 0xA00000 });
+    var cylinderMaterial = new THREE.MeshLambertMaterial({ color: 0x0000D0 });
+
+    var sphere = new THREE.Mesh(
+        new THREE.SphereGeometry(64, 32, 16), sphereMaterial);
+    sphere.position.x = 0;
+    sphere.position.y = 160 * 3;
+    sphere.position.z = 0;
+    scene.add(sphere);
+
+    var cylinderBrim = new THREE.Mesh(
+        new THREE.CylinderGeometry(142, 142, 10, 32), cylinderMaterial);
+    cylinderBrim.position.x = 0;
+    cylinderBrim.position.y = 160 * 3 + 64 + 5;
+    cylinderBrim.position.z = 0;
+    scene.add(cylinderBrim);
+
+    var cylinderBrim = new THREE.Mesh(
+        new THREE.CylinderGeometry(80, 80, 70, 32), cylinderMaterial);
+    cylinderBrim.position.x = 0;
+    cylinderBrim.position.y = 160 * 3 + 64 + 10 + 35;
+    cylinderBrim.position.z = 0;
+    scene.add(cylinderBrim);
 
 }
 
 function createDrinkingBird() {
     // MODELS
     // base + legs + feet
+    console.log("SUPPORT");
     createSupport();
-    
+
     // body + body/head connector
     createBody();
+    console.log("BODY");
 
     // head + hat
     createHead();
@@ -127,14 +164,14 @@ function createDrinkingBird() {
 function fillScene() {
     // SCENE
     scene = new THREE.Scene();
-    scene.fog = new THREE.Fog( 0x808080, 3000, 6000 );
+    scene.fog = new THREE.Fog(0x808080, 3000, 6000);
     // LIGHTS
-    var ambientLight = new THREE.AmbientLight( 0x222222 );
-    var light = new THREE.DirectionalLight( 0xffffff, 1.0 );
-    light.position.set( 200, 400, 500 );
-    
-    var light2 = new THREE.DirectionalLight( 0xffffff, 1.0 );
-    light2.position.set( -400, 200, -300 );
+    var ambientLight = new THREE.AmbientLight(0x222222);
+    var light = new THREE.DirectionalLight(0xffffff, 1.0);
+    light.position.set(200, 400, 500);
+
+    var light2 = new THREE.DirectionalLight(0xffffff, 1.0);
+    light2.position.set(-400, 200, -300);
 
     scene.add(ambientLight);
     scene.add(light);
@@ -143,19 +180,19 @@ function fillScene() {
     scene.add(camera);
 
     if (ground) {
-        Coordinates.drawGround({size:1000});        
+        Coordinates.drawGround({ size: 1000 });
     }
     if (gridX) {
-        Coordinates.drawGrid({size:1000,scale:0.01});
+        Coordinates.drawGrid({ size: 1000, scale: 0.01 });
     }
     if (gridY) {
-        Coordinates.drawGrid({size:1000,scale:0.01, orientation:"y"});
+        Coordinates.drawGrid({ size: 1000, scale: 0.01, orientation: "y" });
     }
     if (gridZ) {
-        Coordinates.drawGrid({size:1000,scale:0.01, orientation:"z"});  
+        Coordinates.drawGrid({ size: 1000, scale: 0.01, orientation: "z" });
     }
     if (axes) {
-        Coordinates.drawAllAxes({axisLength:300,axisRadius:2,axisTess:50});
+        Coordinates.drawAllAxes({ axisLength: 300, axisRadius: 2, axisTess: 50 });
     }
     createDrinkingBird();
 }
@@ -163,10 +200,10 @@ function fillScene() {
 function addToDOM() {
     var container = document.getElementById('container');
     var canvas = container.getElementsByTagName('canvas');
-    if (canvas.length>0) {
+    if (canvas.length > 0) {
         container.removeChild(canvas[0]);
     }
-    container.appendChild( renderer.domElement );
+    container.appendChild(renderer.domElement);
 }
 
 function animate() {
@@ -177,8 +214,7 @@ function animate() {
 function render() {
     var delta = clock.getDelta();
     cameraControls.update(delta);
-    if ( effectController.newGridX !== gridX || effectController.newGridY !== gridY || effectController.newGridZ !== gridZ || effectController.newGround !== ground || effectController.newAxes !== axes)
-    {
+    if (effectController.newGridX !== gridX || effectController.newGridY !== gridY || effectController.newGridZ !== gridZ || effectController.newGround !== ground || effectController.newAxes !== axes) {
         gridX = effectController.newGridX;
         gridY = effectController.newGridY;
         gridZ = effectController.newGridZ;
@@ -193,31 +229,30 @@ function render() {
 function setupGui() {
 
     effectController = {
-    
+
         newGridX: gridX,
         newGridY: gridY,
         newGridZ: gridZ,
         newGround: ground,
         newAxes: axes,
 
-        dummy: function() {
-        }
+        dummy: function() {}
     };
 
     var gui = new dat.GUI();
     gui.add(effectController, "newGridX").name("Show XZ grid");
-    gui.add( effectController, "newGridY" ).name("Show YZ grid");
-    gui.add( effectController, "newGridZ" ).name("Show XY grid");
-    gui.add( effectController, "newGround" ).name("Show ground");
-    gui.add( effectController, "newAxes" ).name("Show axes");
+    gui.add(effectController, "newGridY").name("Show YZ grid");
+    gui.add(effectController, "newGridZ").name("Show XY grid");
+    gui.add(effectController, "newGround").name("Show ground");
+    gui.add(effectController, "newAxes").name("Show axes");
 }
 
 try {
-  init();
-  setupGui();
-  addToDOM();
-  animate();
-} catch(e) {
+    init();
+    setupGui();
+    addToDOM();
+    animate();
+} catch (e) {
     var errorReport = "Your program encountered an unrecoverable error, can not draw on canvas. Error was:<br/><br/>";
-    document.getElementById('#container').append(errorReport+e);
+    document.getElementById('#container').append(errorReport + e);
 }
