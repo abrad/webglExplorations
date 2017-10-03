@@ -52,6 +52,7 @@ function drawDrinkingBird() {
         color: 0xFFFFFF,
         shininess: 100,
         transparent: true,
+        specular: 0xFFFFFF,
         opacity: 0.3
     });
 
